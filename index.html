@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль Трейдера</title>
+    <!-- Подключаем Tailwind CSS для стилей -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Базовые стили для текста и фона, чтобы соответствовать Telegram */
+        body {
+            font-family: 'Inter', sans-serif; /* Используем шрифт Inter */
+            background-color: var(--tg-theme-bg-color, #f4f4f5); /* Цвет фона Telegram или серый */
+            color: var(--tg-theme-text-color, #1a1a1a); /* Цвет текста Telegram или темно-серый */
+        }
+        .container {
+            max-width: 600px; /* Ограничиваем ширину для лучшего вида на больших экранах */
+            margin: 0 auto; /* Центрируем контейнер */
+        }
+        /* Стили для кнопок-ссылок на соцсети */
+        .social-button {
+            background-color: var(--tg-theme-button-color, #007bff); /* Цвет кнопки Telegram или синий */
+            color: var(--tg-theme-button-text-color, #ffffff); /* Цвет текста кнопки Telegram или белый */
+            padding: 12px 24px;
+            border-radius: 12px; /* Скругленные углы */
+            display: flex; /* Для иконки и текста */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Тень */
+        }
+        .social-button:hover {
+            opacity: 0.9;
+        }
+        /* Стили для иконок соцсетей (можно использовать Font Awesome или SVG) */
+        .social-icon {
+            margin-right: 8px;
+            width: 24px;
+            height: 24px;
+            fill: currentColor; /* Использует цвет текста кнопки */
+        }
+        /* Стили для заголовков секций */
+        .section-title {
+            color: var(--tg-theme-text-color, #1a1a1a);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+    <div class="container bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 sm:p-8 mt-4 md:mt-8">
+
+        <!-- Секция "Обо мне" -->
+        <div class="text-center mb-8">
+            <img src="https://placehold.co/120x120/a855f7/ffffff?text=ТВОЕ+ФОТО" alt="Твое фото" class="rounded-full w-32 h-32 mx-auto mb-4 object-cover border-4 border-purple-500">
+            <h1 class="text-3xl sm:text-4xl font-bold section-title mb-2">Твой Никнейм/Имя</h1>
+            <p class="text-lg text-gray-700 dark:text-gray-300">
+                Привет! Меня зовут [Твоё Имя], мне [Твой Возраст] лет, и я занимаюсь трейдингом уже [4.5] года. Моя страсть к финансовым рынкам началась ещё в детстве, и с тех пор я глубоко погружаюсь в мир акций, криптовалют и фондового рынка. На этом сайте и в моих социальных сетях я делюсь своим опытом, стратегиями и мыслями о трейдинге. Моя цель — показать, как можно подходить к торговле осознанно и дисциплинированно.
+            </p>
+        </div>
+
+        <!-- Секция "Мои Социальные Сети" -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold section-title mb-4">Мои Социальные Сети</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="https://youtube.com/твоя_ссылка" target="_blank" class="social-button">
+                    <svg class="social-icon" viewBox="0 0 24 24">
+                        <path d="M19.615 3.184c-1.353-.341-2.812-.657-4.186-.806C14.075 2.1 13 2 12 2s-2.075.1-3.429.378c-1.374.149-2.833.465-4.186.806C3.184 3.6 2 4.6 2 6.5V17.5c0 1.9 1.184 2.9 2.371 3.184c1.353.341 2.812.657 4.186.806C9.925 21.9 11 22 12 22s2.075-.1 3.429-.378c1.374-.149 2.833-.465 4.186-.806C20.816 20.4 22 19.4 22 17.5V6.5c0-1.9-1.184-2.9-2.371-3.184zM9.545 15.5V8.5L16 12l-6.455 3.5z"/>
+                    </svg>
+                    YouTube (RU)
+                </a>
+                <a href="https://youtube.com/твоя_ссылка" target="_blank" class="social-button">
+                    <svg class="social-icon" viewBox="0 0 24 24">
+                        <path d="M19.615 3.184c-1.353-.341-2.812-.657-4.186-.806C14.075 2.1 13 2 12 2s-2.075.1-3.429.378c-1.374.149-2.833.465-4.186.806C3.184 3.6 2 4.6 2 6.5V17.5c0 1.9 1.184 2.9 2.371 3.184c1.353.341 2.812.657 4.186.806C9.925 21.9 11 22 12 22s2.075-.1 3.429-.378c1.374-.149 2.833-.465 4.186-.806C20.816 20.4 22 19.4 22 17.5V6.5c0-1.9-1.184-2.9-2.371-3.184zM9.545 15.5V8.5L16 12l-6.455 3.5z"/>
+                    </svg>
+                    YouTube (EN)
+                </a>
+                <a href="https://t.me/твоя_ссылка" target="_blank" class="social-button">
+                    <svg class="social-icon" viewBox="0 0 24 24">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.064 7.698l-2.007 9.54c-.198.94-.757 1.173-1.545.748L11.5 15.426l-2.58 2.477c-.55.53-.996.996-1.916.996h-.002c-.672 0-1.012-.622-1.258-1.077L.834 10.457c-.822-1.56-.255-2.28 1.488-1.58L17.13 6.942c1.78-.718 2.65-.246 2.41 1.756zM8.5 13.5l1.63 1.57c.18.173.34.33.51.52l3.41-3.26c.2-.18.33-.28.53-.28.1 0 .2.02.3.06l3.44 2.3c.66.45 1.01.21 1.13-.56l.004-.002c.08-.43-.07-.7-.34-1.08L14.73 7.85c-.24-.34-.48-.56-.76-.56-.16 0-.31.06-.48.16L5.87 11.23c-.15.1-.25.2-.42.2-.18 0-.3-.04-.45-.16L2.3 9.45c-.48-.38-.82-.67-1.3-.67-.28 0-.46.06-.58.18-.12.1-.18.18-.26.24L.834 10.457z"/>
+                    </svg>
+                    Telegram
+                </a>
+                <a href="https://instagram.com/твоя_ссылка" target="_blank" class="social-button">
+                    <svg class="social-icon" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07c1.379.066 2.052.276 2.555.474.618.243 1.168.616 1.637 1.086.47.47.842 1.019 1.085 1.638.198.503.408 1.176.475 2.555.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.066 1.379-.276 2.052-.474 2.555-.243.618-.616 1.168-1.086 1.637-.47.47-1.019.842-1.638 1.085-.503.198-1.176.408-2.555.475-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.379-.066-2.052-.276-2.555-.474-.618-.243-1.168-.616-1.637-1.086-.47-.47-.842-1.019-1.085-1.638-.198-.503-.408-1.176-.475-2.555-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.066-1.379.276-2.052.474-2.555.243-.618.616-1.168 1.086-1.637.47-.47 1.019-.842 1.638-1.085.503-.198 1.176-.408 2.555-.475C8.416 2.175 8.796 2.163 12 2.163zm0 3.465a6.398 6.398 0 100 12.796A6.398 6.398 0 0012 5.628zm0 2.502a3.896 3.896 0 110 7.792A3.896 3.896 0 0112 8.13zm6.577-4.921a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
+                    </svg>
+                    Instagram
+                </a>
+                <a href="https://tiktok.com/@твоя_ссылка" target="_blank" class="social-button">
+                    <svg class="social-icon" viewBox="0 0 24 24">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.523 15.65v-3.79c.002-.51-.12-1.02-.348-1.488-.228-.468-.567-.887-.98-1.222.09-.04.18-.08.27-.12.44-.2 1.02-.4 1.52-.4s.99.04 1.43.12c.51.1 1.02.24 1.48.42.06.02.11.05.17.07V9.22c.006-.47-.11-.94-.33-1.39-.22-.44-.54-.83-.93-1.14-.07-.05-.14-.1-.21-.14 0-.01-.01-.01-.01-.02-.48-.3-1.07-.48-1.68-.56-.6-.08-1.2-.08-1.78-.02-.54.05-1.07.16-1.57.34-.05-.01-.1-.02-.15-.02-.06-.02-.12-.04-.18-.06-.5-.14-1.04-.26-1.59-.34-.58-.09-1.17-.07-1.72.03-.54.09-1.07.26-1.56.49-.07.03-.13.06-.2.09-.16.08-.3.17-.44.27-.14.1-.26.22-.38.34-.1.1-.2.2-.28.32-.08.1-.16.2-.24.3-.12.18-.22.37-.3.57-.08.2-.14.4-.18.62-.04.2-.06.4-.06.6V15.65c0 .51.12 1.02.35 1.48.23.47.57.88.98 1.22.09.04.18.08.27.12-.44.2-.99.4-1.5.4s-.97-.04-1.39-.12c-.5-.1-.99-.24-1.44-.42-.06-.02-.11-.05-.16-.07V18.1c-.006.47.11.94.33 1.39.22.44.54.83.93 1.14.07.05.14.1.21.14 0 .01.01.01.01.02.48.3 1.07.48 1.68.56.6.08 1.2.08 1.78.02.54-.05 1.07-.16 1.57-.34.05.01.1.02.15.02.06.02.12.04.18.06.5.14 1.04.26 1.59.34.58.09 1.17.07 1.72-.03.54-.09 1.07-.26 1.56-.49.07-.03.13-.06.2-.09.16-.08.3-.17.44-.27.14-.1.26-.22.38-.34.1-.1.2-.2.28-.32.08-.1.16-.2.24-.3.12-.18.22-.37.3-.57.08-.2.14-.4.18-.62.04-.2.06-.4.06-.6V15.65zm0 0"/>
+                    </svg>
+                    TikTok
+                </a>
+                <!-- Добавь сюда другие ссылки по аналогии -->
+            </div>
+        </div>
+
+        <!-- Секция "Мои Продукты" -->
+        <div>
+            <h2 class="text-2xl font-semibold section-title mb-4">Мои Продукты</h2>
+            <div class="space-y-4 text-gray-700 dark:text-gray-300">
+                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-medium section-title mb-2">Платный Курс "Основы Трейдинга"</h3>
+                    <p>Подробный видеокурс для начинающих, охватывающий все аспекты фондового рынка и криптовалют. От А до Я.</p>
+                    <a href="https://твоя_ссылка_на_курс" target="_blank" class="mt-3 inline-block bg-purple-600 text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition duration-200">Узнать больше</a>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-medium section-title mb-2">Закрытый Telegram-канал с Аналитикой</h3>
+                    <p>Ежедневная эксклюзивная аналитика, торговые идеи и разбор рыночных ситуаций для опытных трейдеров.</p>
+                    <a href="https://твоя_ссылка_на_канал" target="_blank" class="mt-3 inline-block bg-purple-600 text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition duration-200">Присоединиться</a>
+                </div>
+                <!-- Добавь сюда другие продукты по аналогии -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Пустой скрипт для будущих интерактивных элементов Telegram Mini Apps -->
+    <script>
+        // Инициализация Telegram WebApp API (если требуется)
+        // Проверяем, что объект Telegram WebApp доступен
+        if (window.Telegram && window.Telegram.WebApp) {
+            const WebApp = window.Telegram.WebApp;
+            WebApp.ready(); // Уведомляем Telegram, что приложение готово
+
+            // Дополнительные настройки темы (для адаптации к темной/светлой теме Telegram)
+            const root = document.documentElement;
+            WebApp.onEvent('themeChanged', function() {
+                root.style.setProperty('--tg-theme-bg-color', WebApp.themeParams.bg_color);
+                root.style.setProperty('--tg-theme-text-color', WebApp.themeParams.text_color);
+                root.style.setProperty('--tg-theme-button-color', WebApp.themeParams.button_color);
+                root.style.setProperty('--tg-theme-button-text-color', WebApp.themeParams.button_text_color);
+                // Можно добавить больше переменных темы, если нужно
+            });
+
+            // Изначальная установка темы при загрузке
+            root.style.setProperty('--tg-theme-bg-color', WebApp.themeParams.bg_color);
+            root.style.setProperty('--tg-theme-text-color', WebApp.themeParams.text_color);
+            root.style.setProperty('--tg-theme-button-color', WebApp.themeParams.button_color);
+            root.style.setProperty('--tg-theme-button-text-color', WebApp.themeParams.button_text_color);
+
+            // Пример использования главной кнопки Telegram Mini App
+            // WebApp.MainButton.setText('Купить Продукты');
+            // WebApp.MainButton.show();
+            // WebApp.MainButton.onClick(function() {
+            //     WebApp.openTelegramLink('https://t.me/твой_бот?start=products');
+            // });
+
+        } else {
+            console.warn('Telegram WebApp API не инициализирован. Возможно, приложение запущено вне Telegram.');
+        }
+    </script>
+</body>
+</html>
