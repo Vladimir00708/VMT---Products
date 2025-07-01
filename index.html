@@ -10,10 +10,10 @@
         /* Базовые стили для текста и фона, чтобы соответствовать Telegram */
         body {
             font-family: 'Inter', sans-serif; /* Используем шрифт Inter */
-            /* Градиентный фон для всей страницы */
-            background: linear-gradient(to bottom right, var(--tg-theme-bg-color, #f0f2f5), #dce0e6);
+            /* Монохромный фон для всей страницы */
+            background-color: var(--tg-theme-bg-color, #f5f5f5); /* Светло-серый по умолчанию */
             color: var(--tg-theme-text-color, #1a1a1a); /* Цвет текста Telegram или темно-серый */
-            min-height: 100vh; /* Минимальная высота, чтобы градиент заполнил всю страницу */
+            min-height: 100vh; /* Минимальная высота, чтобы фон заполнил всю страницу */
             display: flex; /* Для центрирования контейнера по вертикали */
             align-items: center; /* Центрирование по вертикали */
             justify-content: center; /* Центрирование по горизонтали */
@@ -25,8 +25,8 @@
         }
         /* Стили для кнопок-ссылок на соцсети */
         .social-button {
-            background-color: var(--tg-theme-button-color, #6b46c1); /* Используем фиолетовый оттенок или цвет кнопки Telegram */
-            color: var(--tg-theme-button-text-color, #ffffff); /* Цвет текста кнопки Telegram или белый */
+            background-color: var(--tg-theme-button-color, #333333); /* Темно-серый/черный */
+            color: var(--tg-theme-button-text-color, #ffffff); /* Белый */
             padding: 14px 28px; /* Увеличил паддинги для лучшего внешнего вида */
             border-radius: 14px; /* Более скругленные углы */
             display: flex; /* Для иконки и текста */
@@ -35,12 +35,13 @@
             text-align: center;
             font-weight: 600;
             text-decoration: none;
-            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Добавил трансформацию для эффекта при наведении */
-            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15), 0 3px 6px -2px rgba(0, 0, 0, 0.1); /* Более выразительная тень */
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Добавил трансформацию для эффекта при наведении */
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.2), 0 3px 6px -2px rgba(0, 0, 0, 0.15); /* Более выразительная тень */
         }
         .social-button:hover {
-            background-color: var(--tg-theme-button-color-hover, #7c4dff); /* Цвет при наведении */
+            background-color: var(--tg-theme-button-color-hover, #555555); /* Цвет при наведении (светлее) */
             transform: translateY(-2px); /* Небольшое поднятие при наведении */
+            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.3), 0 4px 8px -2px rgba(0, 0, 0, 0.2); /* Усиленная тень при наведении */
         }
         /* Стили для иконок соцсетей (SVG) */
         .social-icon {
@@ -54,24 +55,37 @@
             color: var(--tg-theme-text-color, #1a1a1a);
         }
         /* Стили для адаптации к темной теме Telegram */
+        body.dark {
+            background-color: var(--tg-theme-bg-color, #1a1a1a); /* Темно-серый/черный для темной темы */
+            color: var(--tg-theme-text-color, #e0e0e0); /* Светлый текст для темной темы */
+        }
         body.dark .container {
-            background-color: var(--tg-theme-bg-color, #2b2b2b);
+            background-color: var(--tg-theme-secondary-bg-color, #2b2b2b); /* Более темный фон контейнера */
         }
         body.dark .text-gray-700 {
-            color: var(--tg-theme-text-color, #c0c0c0);
+            color: var(--tg-theme-text-color, #c0c0c0); /* Светлее текст */
         }
         body.dark .bg-gray-50 {
-            background-color: var(--tg-theme-secondary-bg-color, #3a3a3a);
+            background-color: var(--tg-theme-secondary-bg-color, #3a3a3a); /* Темнее фон для секции продуктов */
+        }
+        body.dark .social-button {
+            background-color: var(--tg-theme-button-color, #444444); /* Темнее кнопки */
+        }
+        body.dark .social-button:hover {
+            background-color: var(--tg-theme-button-color-hover, #666666); /* Светлее при наведении */
+        }
+        .border-monochrome {
+            border-color: var(--tg-theme-hint-color, #888888); /* Серый цвет для границ */
         }
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8">
-    <div class="container bg-white dark:bg-gray-800 shadow-xl rounded-3xl p-6 sm:p-8 mt-4 md:mt-8">
+    <div class="container bg-white dark:bg-gray-800 shadow-xl rounded-3xl p-6 sm:p-8 mt-4 md:mt-8 border border-monochrome">
 
         <!-- Секция "Обо мне" -->
         <div class="text-center mb-10">
-            <!-- Здесь можно будет загрузить твое реальное фото. Пока это заглушка. -->
-            <img src="https://placehold.co/150x150/8a2be2/ffffff?text=VMT+Company" alt="Твое фото" class="rounded-full w-36 h-36 mx-auto mb-5 object-cover border-4 border-purple-500 shadow-md">
+            <!-- Ваше реальное фото -->
+            <img src="https://i.ibb.co/Q7hmC7RC/photo-2024-07-01-10-09-02.jpg" alt="Твое фото" class="rounded-full w-36 h-36 mx-auto mb-5 object-cover border-4 border-monochrome shadow-md">
             <h1 class="text-3xl sm:text-4xl font-bold section-title mb-2">VMT - Company</h1>
             <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                 <!-- Биография, предоставленная пользователем -->
@@ -88,7 +102,7 @@
 
         <!-- Секция "Мои Социальные Сети" -->
         <div class="mb-10">
-            <h2 class="text-2xl font-semibold section-title mb-5 border-b-2 border-purple-400 pb-2">Мои Социальные Сети</h2>
+            <h2 class="text-2xl font-semibold section-title mb-5 border-b-2 border-monochrome pb-2">Мои Социальные Сети</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <a href="https://www.youtube.com/@MorachkovskiyTells" target="_blank" class="social-button">
                     <!-- SVG иконка YouTube -->
@@ -131,9 +145,9 @@
 
         <!-- Секция "Мои Продукты" -->
         <div>
-            <h2 class="text-2xl font-semibold section-title mb-5 border-b-2 border-purple-400 pb-2">Мои Продукты</h2>
+            <h2 class="text-2xl font-semibold section-title mb-5 border-b-2 border-monochrome pb-2">Мои Продукты</h2>
             <div class="space-y-5 text-gray-700 dark:text-gray-300">
-                <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-xl shadow-md text-center">
+                <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-xl shadow-md text-center border border-monochrome">
                     <h3 class="text-xl font-medium section-title mb-2">Скоро здесь появятся мои эксклюзивные продукты!</h3>
                     <p class="mb-3">
                         Я активно работаю над созданием обучающих курсов и других ценных материалов по трейдингу.
@@ -162,6 +176,7 @@
                 const isDark = WebApp.colorScheme === 'dark';
                 document.body.classList.toggle('dark', isDark);
 
+                // Устанавливаем цвета из Telegram WebApp API
                 root.style.setProperty('--tg-theme-bg-color', WebApp.themeParams.bg_color);
                 root.style.setProperty('--tg-theme-text-color', WebApp.themeParams.text_color);
                 root.style.setProperty('--tg-theme-hint-color', WebApp.themeParams.hint_color);
@@ -170,11 +185,11 @@
                 root.style.setProperty('--tg-theme-button-text-color', WebApp.themeParams.button_text_color);
                 root.style.setProperty('--tg-theme-secondary-bg-color', WebApp.themeParams.secondary_bg_color);
                 
-                // Пользовательские цвета для hover эффектов, если Telegram API их не предоставляет
+                // Пользовательские цвета для hover эффектов, адаптированные под монохром
                 if (isDark) {
-                    root.style.setProperty('--tg-theme-button-color-hover', '#8c5eff'); // Более светлый фиолетовый для темной темы
+                    root.style.setProperty('--tg-theme-button-color-hover', '#666666'); // Более светлый серый для темной темы
                 } else {
-                    root.style.setProperty('--tg-theme-button-color-hover', '#7c4dff'); // Более темный фиолетовый для светлой темы
+                    root.style.setProperty('--tg-theme-button-color-hover', '#555555'); // Более темный серый для светлой темы
                 }
             };
 
@@ -191,14 +206,19 @@
         } else {
             console.warn('Telegram WebApp API не инициализирован. Возможно, приложение запущено вне Telegram.');
             // Fallback для запуска вне Telegram, например, в браузере
-            document.body.style.backgroundColor = '#f0f2f5';
-            document.body.style.color = '#1a1a1a';
-            document.querySelector('.container').style.backgroundColor = '#ffffff';
-            document.querySelector('.text-gray-700').style.color = '#4a5568';
-            document.querySelectorAll('.bg-gray-50').forEach(el => el.style.backgroundColor = '#f7fafc');
-            // Если нужно, можно добавить определение, что это не Telegram, и стилизовать кнопки
-            // например, используя стандартные Tailwind классы без var(--tg-theme-...)
+            document.body.style.backgroundColor = '#f5f5f5'; /* Светло-серый фон */
+            document.body.style.color = '#1a1a1a'; /* Темный текст */
+            document.querySelector('.container').style.backgroundColor = '#ffffff'; /* Белый контейнер */
+            document.querySelector('.text-gray-700').style.color = '#4a5568'; /* Темно-серый текст */
+            document.querySelectorAll('.bg-gray-50').forEach(el => el.style.backgroundColor = '#f7fafc'); /* Светлый фон для продуктов */
+            
+            // Устанавливаем монохромные цвета для кнопок в режиме без Telegram API
+            document.querySelectorAll('.social-button').forEach(button => {
+                button.style.backgroundColor = '#333333';
+                button.style.color = '#ffffff';
+            });
         }
     </script>
 </body>
 </html>
+
