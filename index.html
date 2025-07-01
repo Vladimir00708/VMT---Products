@@ -6,90 +6,297 @@
     <title>Профиль VMT - Company</title>
     <!-- Подключаем Tailwind CSS для стилей -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Подключаем Animate.css для готовых анимаций -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
-        /* Базовые стили для текста и фона, чтобы соответствовать Telegram */
+        /* Базовые стили */
         body {
-            font-family: 'Inter', sans-serif; /* Используем шрифт Inter */
-            /* Монохромный фон для всей страницы */
-            background-color: var(--tg-theme-bg-color, #f5f5f5); /* Светло-серый по умолчанию */
-            color: var(--tg-theme-text-color, #1a1a1a); /* Цвет текста Telegram или темно-серый */
-            min-height: 100vh; /* Минимальная высота, чтобы фон заполнил всю страницу */
-            display: flex; /* Для центрирования контейнера по вертикали */
-            align-items: center; /* Центрирование по вертикали */
-            justify-content: center; /* Центрирование по горизонтали */
-        }
-        .container {
-            max-width: 600px; /* Ограничиваем ширину для лучшего вида на больших экранах */
-            width: 95%; /* Адаптивная ширина */
-            margin: 0 auto; /* Центрируем контейнер */
-        }
-        /* Стили для кнопок-ссылок на соцсети */
-        .social-button {
-            background-color: var(--tg-theme-button-color, #333333); /* Темно-серый/черный */
-            color: var(--tg-theme-button-text-color, #ffffff); /* Белый */
-            padding: 14px 28px; /* Увеличил паддинги для лучшего внешнего вида */
-            border-radius: 14px; /* Более скругленные углы */
-            display: flex; /* Для иконки и текста */
+            font-family: 'Inter', sans-serif;
+            background-color: var(--tg-theme-bg-color, #f5f5f5);
+            color: var(--tg-theme-text-color, #1a1a1a);
+            min-height: 100vh;
+            display: flex;
             align-items: center;
             justify-content: center;
+            overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
+            position: relative;
+            z-index: 0;
+        }
+
+        /* Анимированный фон (тонкий радиальный градиент) */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0,0,0,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0,0,0,0.05) 0%, transparent 50%);
+            background-size: 200% 200%;
+            animation: moveBackground 15s ease infinite alternate;
+            z-index: -1;
+        }
+        @keyframes moveBackground {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+        body.dark::before {
+            background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03) 0%, transparent 50%);
+        }
+
+        /* Основной контейнер с эффектом матового стекла */
+        .container {
+            max-width: 600px;
+            width: 95%;
+            margin: 0 auto;
+            background-color: var(--tg-theme-secondary-bg-color-alpha, rgba(255, 255, 255, 0.4));
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--tg-theme-hint-color-alpha, rgba(136, 136, 136, 0.2));
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15), /* Мягкая внешняя тень */
+                0 8px 20px rgba(0, 0, 0, 0.08), /* Легкая верхняя тень */
+                inset 0 0 15px rgba(255, 255, 255, 0.1); /* Внутренняя тень для глубины */
+            border-radius: 24px;
+            position: relative;
+            z-index: 1;
+            padding: 30px; /* Увеличил внутренний отступ */
+        }
+
+        /* Анимированный градиент для заголовка компании */
+        .company-title {
+            font-size: 3rem; /* Увеличил размер шрифта */
+            font-weight: 900; /* Максимальная жирность */
+            letter-spacing: 0.05em; /* Увеличенный интервал */
             text-align: center;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Добавил трансформацию для эффекта при наведении */
-            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.2), 0 3px 6px -2px rgba(0, 0, 0, 0.15); /* Более выразительная тень */
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--tg-theme-text-color, #333) 0%, #888 50%, var(--tg-theme-text-color, #333) 100%);
+            background-size: 200% auto; /* Для эффекта движения градиента */
+            color: transparent; /* Делаем текст прозрачным, чтобы был виден градиент */
+            -webkit-background-clip: text; /* Обрезаем фон по форме текста */
+            background-clip: text;
+            animation: animatedGradient 5s linear infinite alternate; /* Анимация движения градиента */
+            display: inline-block; /* Чтобы градиент применялся ко всему тексту */
+            white-space: nowrap; /* Чтобы текст не переносился */
+            border-right: none; /* Убедимся, что по умолчанию нет курсора */
         }
-        .social-button:hover {
-            background-color: var(--tg-theme-button-color-hover, #555555); /* Цвет при наведении (светлее) */
-            transform: translateY(-2px); /* Небольшое поднятие при наведении */
-            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.3), 0 4px 8px -2px rgba(0, 0, 0, 0.2); /* Усиленная тень при наведении */
+        @keyframes animatedGradient {
+            to { background-position: 200% center; }
         }
-        /* Стили для иконок соцсетей (SVG) */
-        .social-icon {
-            margin-right: 10px; /* Увеличил отступ */
-            width: 26px; /* Увеличил размер */
-            height: 26px; /* Увеличил размер */
-            fill: currentColor; /* Использует цвет текста кнопки */
+
+        /* Анимация "печатания" для заголовка */
+        .company-title.is-typing-active { /* Новый класс для активации анимации печатания */
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 2.5s steps(12, end) forwards; /* 12 шагов для "VMT - Company" */
         }
+        .company-title.has-typing-cursor { /* Класс для мигающего курсора */
+            border-right: .15em solid var(--tg-theme-link-color, #007AFF); /* Цвет курсора */
+            animation: blinking-cursor .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blinking-cursor {
+            from, to { border-color: transparent }
+            50% { border-color: var(--tg-theme-link-color, #007AFF); }
+        }
+
+        /* Анимация плавания для аватара */
+        @keyframes float {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.03); } /* Легкое поднятие и увеличение */
+            100% { transform: translateY(0px) scale(1); }
+        }
+        .avatar-float {
+            animation: float 4s ease-in-out infinite alternate; /* Медленное, бесконечное плавание */
+        }
+
+        /* Стили для аватара */
+        .profile-image {
+            width: 120px; /* Увеличил размер аватара */
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--tg-theme-hint-color, #888);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        body.dark .profile-image {
+            border-color: var(--tg-theme-hint-color, #555);
+        }
+
+        /* Стили для текста "Мой Путь" */
+        .my-path-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--tg-theme-text-color-secondary, #4a4a4a); /* Изменен на матовый/черный */
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* Стили для основного текста */
+        .bio-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
         /* Стили для заголовков секций */
         .section-title {
-            color: var(--tg-theme-text-color, #1a1a1a);
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            position: relative; /* Для псевдоэлемента */
+            text-align: center; /* Центрируем заголовок */
         }
-        /* Стили для адаптации к темной теме Telegram */
+        /* Скругленная линия под заголовком секции */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%); /* Центрируем линию */
+            width: 80px; /* Фиксированная ширина линии */
+            height: 4px; /* Толщина линии */
+            background: linear-gradient(to right, var(--tg-theme-hint-color, #888) 0%, var(--tg-theme-hint-color, #888) 100%);
+            border-radius: 2px; /* Скругленные углы линии */
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+        .section-title:hover::after {
+            width: 120px; /* Расширяем линию при наведении */
+            background: linear-gradient(to right, var(--tg-theme-link-color, #007AFF) 0%, var(--tg-theme-link-color, #007AFF) 100%); /* Меняем цвет при наведении */
+        }
+        body.dark .section-title::after {
+            background: linear-gradient(to right, var(--tg-theme-hint-color, #555) 0%, var(--tg-theme-hint-color, #555) 100%);
+        }
+        body.dark .section-title:hover::after {
+            background: linear-gradient(to right, var(--tg-theme-link-color, #007AFF) 0%, var(--tg-theme-link-color, #007AFF) 100%);
+        }
+
+
+        /* Стили для кнопок социальных сетей */
+        .social-button {
+            background-color: var(--tg-theme-button-color, #222);
+            color: var(--tg-theme-button-text-color, #fff);
+            padding: 16px 32px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 0 15px rgba(255, 255, 255, 0.1); /* Легкое свечение */
+        }
+        .social-button:active {
+            transform: translateY(-1px) scale(0.98); /* Эффект нажатия */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .social-icon {
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+        .social-button.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+            filter: grayscale(100%);
+            box-shadow: none; /* Убираем тень для disabled */
+            transform: none; /* Отключаем hover-эффект для disabled */
+        }
+
+        /* Стили для карточки продуктов */
+        .product-card {
+            background-color: var(--tg-theme-secondary-bg-color-alpha, rgba(249, 249, 249, 0.7)); /* Полупрозрачный фон */
+            color: var(--tg-theme-text-color, #333);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            border: 1px solid var(--tg-theme-hint-color-alpha, rgba(136, 136, 136, 0.2));
+            backdrop-filter: blur(10px); /* Размытие для карточки продуктов */
+            -webkit-backdrop-filter: blur(10px);
+        }
+        body.dark .product-card {
+            background-color: var(--tg-theme-secondary-bg-color-alpha, rgba(51, 51, 51, 0.7));
+            color: var(--tg-theme-text-color, #eee);
+            border-color: var(--tg-theme-hint-color-alpha, rgba(85, 85, 85, 0.2));
+        }
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .product-description {
+            line-height: 1.6;
+        }
+
+        /* Анимация появления при скролле (Intersection Observer) */
+        .hidden-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .visible-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Дополнительные переменные для прозрачности */
+        :root {
+            --tg-theme-secondary-bg-color-alpha: rgba(255, 255, 255, 0.4);
+            --tg-theme-hint-color-alpha: rgba(136, 136, 136, 0.2);
+            --tg-theme-text-color-secondary: #4a4a4a; /* Новый цвет для текста "Мой Путь" */
+        }
         body.dark {
-            background-color: var(--tg-theme-bg-color, #1a1a1a); /* Темно-серый/черный для темной темы */
-            color: var(--tg-theme-text-color, #e0e0e0); /* Светлый текст для темной темы */
+            --tg-theme-secondary-bg-color-alpha: rgba(43, 43, 43, 0.6);
+            --tg-theme-hint-color-alpha: rgba(136, 136, 136, 0.15);
+            --tg-theme-text-color-secondary: #c0c0c0; /* Светлее в темной теме */
         }
-        body.dark .container {
-            background-color: var(--tg-theme-secondary-bg-color, #2b2b2b); /* Более темный фон контейнера */
+        /* Стили для индикатора загрузки */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid var(--tg-theme-link-color, #007AFF); /* Blue */
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 2s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
         }
-        body.dark .text-gray-700 {
-            color: var(--tg-theme-text-color, #c0c0c0); /* Светлее текст */
-        }
-        body.dark .bg-gray-50 {
-            background-color: var(--tg-theme-secondary-bg-color, #3a3a3a); /* Темнее фон для секции продуктов */
-        }
-        body.dark .social-button {
-            background-color: var(--tg-theme-button-color, #444444); /* Темнее кнопки */
-        }
-        body.dark .social-button:hover {
-            background-color: var(--tg-theme-button-color-hover, #666666); /* Светлее при наведении */
-        }
-        .border-monochrome {
-            border-color: var(--tg-theme-hint-color, #888888); /* Серый цвет для границ */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8">
-    <div class="container bg-white dark:bg-gray-800 shadow-xl rounded-3xl p-6 sm:p-8 mt-4 md:mt-8 border border-monochrome">
+    <div class="container rounded-3xl mt-4 md:mt-8">
 
-        <!-- Секция "Обо мне" -->
         <div class="text-center mb-10">
             <!-- Ваше реальное фото -->
-            <img src="https://i.ibb.co/Q7hmC7RC/photo-2024-07-01-10-09-02.jpg" alt="Твое фото" class="rounded-full w-36 h-36 mx-auto mb-5 object-cover border-4 border-monochrome shadow-md">
-            <h1 class="text-3xl sm:text-4xl font-bold section-title mb-2">VMT - Company</h1>
-            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                <!-- Биография, предоставленная пользователем -->
-                <span class="font-semibold">Мой Путь: Трейдинг Без Купюр</span><br><br>
+            <img src="https://i.ibb.co/Q7hmC7RC/photo-2024-07-01-10-09-02.jpg" alt="Логотип VMT Company" class="profile-image avatar-float animate__animated animate__fadeIn animate__delay-0.2s mx-auto">
+            <h1 id="companyTitle" class="company-title animate__animated animate__fadeIn animate__delay-0.4s"></h1>
+            <p class="my-path-title animate__animated animate__fadeIn animate__delay-0.6s">Мой Путь: Трейдинг Без Купюр</p>
+            <p class="bio-text animate__animated animate__fadeIn animate__delay-0.8s">
                 Приветствую вас, будущие лидеры рынка и коллеги по страсти!<br><br>
                 Меня зовут Вова, и для меня трейдинг — это не просто профессия, это часть моей жизни, её осознанное начало. Мой путь "Юного трейдера" стартовал в начале 2021 года, когда большинство моих сверстников ещё только мечтали о первых заработках.<br><br>
                 С тех пор я провёл тысячи часов, анализируя графики, поглощая информацию из каждого доступного источника. Я терял деньги — много, очень много. Я снова зарабатывал — ещё больше. На моём счету бесчисленное количество ошибок, которые стали бесценными уроками. Я прошел через десятки курсов — от сомнительных "гуру" до признанных профессионалов, чьё обучение обошлось мне в сумму, превышающую $9000.<br><br>
@@ -100,83 +307,68 @@
             </p>
         </div>
 
-        <!-- Секция "Мои Социальные Сети" -->
-        <div class="mb-10">
-            <h2 class="text-2xl font-semibold section-title mb-5 border-b-2 border-monochrome pb-2">Мои Социальные Сети</h2>
+        <div class="mb-10 hidden-section">
+            <h2 class="section-title">Мои Социальные Сети</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <a href="https://www.youtube.com/@MorachkovskiyTells" target="_blank" class="social-button">
-                    <!-- SVG иконка YouTube -->
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path d="M19.615 3.184c-1.353-.341-2.812-.657-4.186-.806C14.075 2.1 13 2 12 2s-2.075.1-3.429.378c-1.374.149-2.833.465-4.186.806C3.184 3.6 2 4.6 2 6.5V17.5c0 1.9 1.184 2.9 2.371 3.184c1.353.341 2.812.657 4.186.806C9.925 21.9 11 22 12 22s2.075-.1 3.429-.378c1.374-.149 2.833-.465 4.186-.806C20.816 20.4 22 19.4 22 17.5V6.5c0-1.9-1.184-2.9-2.371-3.184zM9.545 15.5V8.5L16 12l-6.455 3.5z"/>
-                    </svg>
+                    <svg class="social-icon" viewBox="0 0 24 24"><path d="M19.615 3.184c-1.353-.341-2.812-.657-4.186-.806C14.075 2.1 13 2 12 2s-2.075.1-3.429.378c-1.374.149-2.833.465-4.186.806C3.184 3.6 2 4.6 2 6.5V17.5c0 1.9 1.184 2.9 2.371 3.184c1.353.341 2.812.657 4.186.806C9.925 21.9 11 22 12 22s2.075-.1 3.429-.378c-1.374.149-2.833.465-4.186-.806C20.816 20.4 22 19.4 22 17.5V6.5c0-1.9-1.184-2.9-2.371-3.184zM9.545 15.5V8.5L16 12l-6.455 3.5z"/></svg>
                     YouTube (RU)
                 </a>
-                <a href="https://youtube.com/твоя_ссылка_eng" target="_blank" class="social-button opacity-70 cursor-not-allowed">
-                    <!-- SVG иконка YouTube -->
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path d="M19.615 3.184c-1.353-.341-2.812-.657-4.186-.806C14.075 2.1 13 2 12 2s-2.075.1-3.429.378c-1.374.149-2.833.465-4.186.806C3.184 3.6 2 4.6 2 6.5V17.5c0 1.9 1.184 2.9 2.371 3.184c1.353.341 2.812.657 4.186.806C9.925 21.9 11 22 12 22s2.075-.1 3.429-.378c1.374-.149 2.833-.465 4.186-.806C20.816 20.4 22 19.4 22 17.5V6.5c0-1.9-1.184-2.9-2.371-3.184zM9.545 15.5V8.5L16 12l-6.455 3.5z"/>
-                    </svg>
+                <a href="https://youtube.com/твоя_ссылка_eng" target="_blank" class="social-button disabled">
+                    <svg class="social-icon" viewBox="0 0 24 24"><path d="M19.615 3.184c-1.353-.341-2.812-.657-4.186-.806C14.075 2.1 13 2 12 2s-2.075.1-3.429.378c-1.374.149-2.833.465-4.186.806C3.184 3.6 2 4.6 2 6.5V17.5c0 1.9 1.184 2.9 2.371 3.184c1.353.341 2.812.657 4.186.806C9.925 21.9 11 22 12 22s2.075-.1 3.429-.378c-1.374.149-2.833.465-4.186-.806C20.816 20.4 22 19.4 22 17.5V6.5c0-1.9-1.184-2.9-2.371-3.184zM9.545 15.5V8.5L16 12l-6.455 3.5z"/></svg>
                     YouTube (EN) - Скоро
                 </a>
                 <a href="https://t.me/crypto_district13" target="_blank" class="social-button">
-                    <!-- SVG иконка Telegram -->
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.064 7.698l-2.007 9.54c-.198.94-.757 1.173-1.545.748L11.5 15.426l-2.58 2.477c-.55.53-.996.996-1.916.996h-.002c-.672 0-1.012-.622-1.258-1.077L.834 10.457c-.822-1.56-.255-2.28 1.488-1.58L17.13 6.942c1.78-.718 2.65-.246 2.41 1.756zM8.5 13.5l1.63 1.57c.18.173.34.33.51.52l3.41-3.26c.2-.18.33-.28.53-.28.1 0 .2.02.3.06l3.44 2.3c.66.45 1.01.21 1.13-.56l.004-.002c.08-.43-.07-.7-.34-1.08L14.73 7.85c-.24-.34-.48-.56-.76-.56-.16 0-.31.06-.48.16L5.87 11.23c-.15.1-.25.2-.42.2-.18 0-.3-.04-.45-.16L2.3 9.45c-.48-.38-.82-.67-1.3-.67-.28 0-.46.06-.58.18-.12.1-.18.18-.26.24L.834 10.457z"/>
-                    </svg>
+                    <svg class="social-icon" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.064 7.698l-2.007 9.54c-.198.94-.757 1.173-1.545.748L11.5 15.426l-2.58 2.477c-.55.53-.996.996-1.916.996h-.002c-.672 0-1.012-.622-1.258-1.077L.834 10.457c-.822-1.56-.255-2.28 1.488-1.58L17.13 6.942c1.78-.718 2.65-.246 2.41 1.756zM8.5 13.5l1.63 1.57c.18.173.34.33.51.52l3.41-3.26c.2-.18.33-.28.53-.28.1 0 .2.02.3.06l3.44 2.3c.66.45 1.01.21 1.13-.56l.004-.002c.08-.43-.07-.7-.34-1.08L14.73 7.85c-.24-.34-.48-.56-.76-.56-.16 0-.31.06-.48.16L5.87 11.23c-.15.1-.25.2-.42.2-.18 0-.3-.04-.45-.16L2.3 9.45c-.48-.38-.82-.67-1.3-.67-.28 0-.46.06-.58.18-.12.1-.18.18-.26.24L.834 10.457z"/></svg>
                     Telegram
                 </a>
                 <a href="https://www.instagram.com/crypto_district13?igsh=NXYxam1tbHQwaTlv" target="_blank" class="social-button">
-                    <!-- SVG иконка Instagram -->
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07c1.379.066 2.052.276 2.555.474.618.243 1.168.616 1.637 1.086.47.47.842 1.019 1.085 1.638.198.503.408 1.176.475 2.555.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.066 1.379-.276 2.052-.474 2.555-.243.618-.616 1.168-1.086 1.637-.47.47-1.019.842-1.638 1.085-.503.198-1.176.408-2.555.475-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.379-.066-2.052-.276-2.555-.474-.618-.243-1.168-.616-1.637-1.086-.47-.47-.842-1.019-1.085-1.638-.198-.503-.408-1.176-.475-2.555-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.066-1.379.276-2.052.474-2.555.243-.618.616-1.168 1.086-1.637.47-.47 1.019-.842 1.638-1.085.503-.198 1.176-.408 2.555-.475C8.416 2.175 8.796 2.163 12 2.163zm0 3.465a6.398 6.398 0 100 12.796A6.398 6.398 0 0012 5.628zm0 2.502a3.896 3.896 0 110 7.792A3.896 3.896 0 0112 8.13zm6.577-4.921a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
-                    </svg>
+                    <svg class="social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07c1.379.066 2.052.276 2.555.474.618.243 1.168.616 1.637 1.086.47.47.842 1.019 1.085 1.638.198.503.408 1.176.475 2.555.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.066 1.379-.276 2.052-.474 2.555-.243.618-.616 1.168-1.086 1.637-.47.47-1.019.842-1.638 1.085-.503.198-1.176.408-2.555.475-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.379-.066-2.052-.276-2.555-.474-.618-.243-1.168-.616-1.637-1.086-.47-.47-.842-1.019-1.085-1.638-.198-.503-.408-1.176-.475-2.555-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.066-1.379.276-2.052.474-2.555.243-.618.616-1.168 1.086-1.637.47-.47 1.019-.842 1.638-1.085.503-.198 1.176-.408 2.555-.475C8.416 2.175 8.796 2.163 12 2.163zm0 3.465a6.398 6.398 0 100 12.796A6.398 6.398 0 0012 5.628zm0 2.502a3.896 3.896 0 110 7.792A3.896 3.896 0 0112 8.13zm6.577-4.921a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>
                     Instagram
                 </a>
-                <a href="https://tiktok.com/@твоя_ссылка_тикток" target="_blank" class="social-button opacity-70 cursor-not-allowed">
-                    <!-- SVG иконка TikTok -->
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.523 15.65v-3.79c.002-.51-.12-1.02-.348-1.488-.228-.468-.567-.887-.98-1.222.09-.04.18-.08.27-.12.44-.2 1.02-.4 1.52-.4s.99.04 1.43.12c.51.1 1.02.24 1.48.42.06.02.11.05.17.07V9.22c.006-.47-.11-.94-.33-1.39-.22-.44-.54-.83-.93-1.14-.07-.05-.14-.1-.21-.14 0-.01-.01-.01-.01-.02-.48-.3-1.07-.48-1.68-.56-.6-.08-1.2-.08-1.78-.02-.54.05-1.07.16-1.57.34-.05-.01-.1-.02-.15-.02-.06-.02-.12-.04-.18-.06-.5-.14-1.04-.26-1.59-.34-.58-.09-1.17-.07-1.72.03-.54.09-1.07.26-1.56.49-.07.03-.13.06-.2.09-.16.08-.3.17-.44.27-.14.1-.26.22-.38.34-.1.1-.2.2-.28.32-.08.1-.16.2-.24.3-.12.18-.22.37-.3.57-.08.2-.14.4-.18.62-.04.2-.06.4-.06.6V15.65c0 .51.12 1.02.35 1.48.23.47.57.88.98 1.22.09.04.18.08.27.12-.44.2-.99.4-1.5.4s-.97-.04-1.39-.12c-.5-.1-.99-.24-1.44-.42-.06-.02-.11-.05-.16-.07V18.1c-.006.47.11.94.33 1.39.22.44.54.83.93 1.14.07.05.14.1.21.14 0 .01.01.01.01.02.48.3 1.07.48 1.68.56.6.08 1.2.08 1.78.02-.54.05-1.07.16-1.57.34-.05-.01-.1-.02-.15-.02-.06-.02-.12-.04-.18-.06-.5-.14-1.04-.26-1.59-.34-.58-.09-1.17-.07-1.72.03-.54.09-1.07.26-1.56.49-.07.03-.13.06-.2.09-.16.08-.3.17-.44.27-.14-.1-.26-.22-.38-.34-.1-.1-.2-.2-.28-.32.08-.1.16-.2.24-.3.12-.18.22-.37.3-.57.08-.2.14-.4.18-.62.04-.2.06-.4.06-.6V15.65zm0 0"/>
-                    </svg>
+                <a href="https://tiktok.com/@твоя_ссылка_тикток" target="_blank" class="social-button disabled">
+                    <svg class="social-icon" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.523 15.65v-3.79c.002-.51-.12-1.02-.348-1.488-.228-.468-.567-.887-.98-1.222.09-.04.18-.08.27-.12.44-.2 1.02-.4 1.52-.4s.99.04 1.43.12c.51.1 1.02.24 1.48.42.06.02.11.05.17.07V9.22c.006-.47-.11-.94-.33-1.39-.22-.44-.54-.83-.93-.114-.07-.05-.14-.1-.21-.14 0-.01-.01-.01-.01-.02-.48-.3-1.07-.48-1.68-.56-.6-.08-1.2-.08-1.78-.02-.54.05-1.07.16-1.57.34-.05-.01-.1-.02-.15-.02-.06-.02-.12-.04-.18-.06-.5-.14-1.04-.26-1.59-.34-.58-.09-1.17-.07-1.72.03-.54.09-1.07.26-1.56.49-.07.03-.13.06-.2.09-.16.08-.3.17-.44.27-.14-.1-.26-.22-.38-.34-.1-.1-.2-.2-.28-.32-.08.1-.16.2-.24.3-.12.18-.22.37-.3.57-.08-.2-.14-.4-.18.62-.04.2-.06.4-.06.6V15.65zm0 0"/></svg>
                     TikTok - Скоро
                 </a>
-                <!-- Добавь сюда другие ссылки по аналогии -->
             </div>
         </div>
 
-        <!-- Секция "Мои Продукты" -->
-        <div>
-            <h2 class="text-2xl font-semibold section-title mb-5 border-b-2 border-monochrome pb-2">Мои Продукты</h2>
-            <div class="space-y-5 text-gray-700 dark:text-gray-300">
-                <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-xl shadow-md text-center border border-monochrome">
-                    <h3 class="text-xl font-medium section-title mb-2">Скоро здесь появятся мои эксклюзивные продукты!</h3>
-                    <p class="mb-3">
-                        Я активно работаю над созданием обучающих курсов и других ценных материалов по трейдингу.
-                        Следите за обновлениями в моих социальных сетях, чтобы не пропустить запуск!
-                    </p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                        [Например: Платный Курс "Основы Трейдинга: От Новичка до Профи", Закрытый Telegram-канал с Аналитикой]
-                    </p>
-                </div>
+        <div class="mb-10 hidden-section">
+            <h2 class="section-title">Мои Продукты</h2>
+            <div class="product-card">
+                <h3 class="product-title">Скоро здесь появятся мои эксклюзивные продукты!</h3>
+                <p class="product-description">
+                    Я активно работаю над созданием обучающих курсов и других ценных материалов по трейдингу.
+                    Следите за обновлениями в моих социальных сетях, чтобы не пропустить запуск!
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    Например: Платный Курс "Основы Трейдинга: От Новичка до Профи", Закрытый Telegram-канал с Аналитикой
+                </p>
+            </div>
+        </div>
+
+        <!-- Новая секция: Торговая Мудрость от AI -->
+        <div class="mb-10 hidden-section">
+            <h2 class="section-title">Торговая мудрость для вас ✨</h2>
+            <div class="product-card text-center">
+                <p id="aiInsightDisplay" class="text-lg font-medium mb-4">Нажмите кнопку, чтобы получить торговую мудрость!</p>
+                <button id="generateInsightBtn" class="social-button mx-auto">
+                    Сгенерировать Мудрость <span class="loader hidden"></span>
+                </button>
             </div>
         </div>
 
     </div>
 
-    <!-- Пустой скрипт для будущих интерактивных элементов Telegram Mini Apps -->
     <script>
-        // Инициализация Telegram WebApp API (если требуется)
-        // Проверяем, что объект Telegram WebApp доступен
+        // Инициализация Telegram WebApp API
         if (window.Telegram && window.Telegram.WebApp) {
             const WebApp = window.Telegram.WebApp;
-            WebApp.ready(); // Уведомляем Telegram, что приложение готово
-
-            // Дополнительные настройки темы (для адаптации к темной/светлой теме Telegram)
+            WebApp.ready();
             const root = document.documentElement;
             const updateTheme = () => {
                 const isDark = WebApp.colorScheme === 'dark';
                 document.body.classList.toggle('dark', isDark);
-
-                // Устанавливаем цвета из Telegram WebApp API
                 root.style.setProperty('--tg-theme-bg-color', WebApp.themeParams.bg_color);
                 root.style.setProperty('--tg-theme-text-color', WebApp.themeParams.text_color);
                 root.style.setProperty('--tg-theme-hint-color', WebApp.themeParams.hint_color);
@@ -185,37 +377,284 @@
                 root.style.setProperty('--tg-theme-button-text-color', WebApp.themeParams.button_text_color);
                 root.style.setProperty('--tg-theme-secondary-bg-color', WebApp.themeParams.secondary_bg_color);
                 
-                // Пользовательские цвета для hover эффектов, адаптированные под монохром
+                // Вспомогательная функция для конвертации HEX в RGBA
+                const hexToRgbA = (hex, alpha) => {
+                    let c;
+                    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+                        c= hex.substring(1).split('');
+                        if(c.length===3){
+                            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+                        }
+                        c= '0x'+c.join('');
+                        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+','+alpha+')';
+                    }
+                    return hex; // Возвращаем исходное значение, если не hex
+                };
+
+                // Динамически устанавливаем прозрачные цвета для эффекта стекла
                 if (isDark) {
-                    root.style.setProperty('--tg-theme-button-color-hover', '#666666'); // Более светлый серый для темной темы
+                    root.style.setProperty('--tg-theme-button-color-hover', '#555555');
+                    root.style.setProperty('--tg-theme-secondary-bg-color-alpha', hexToRgbA(WebApp.themeParams.secondary_bg_color, 0.6));
+                    root.style.setProperty('--tg-theme-hint-color-alpha', hexToRgbA(WebApp.themeParams.hint_color, 0.15));
                 } else {
-                    root.style.setProperty('--tg-theme-button-color-hover', '#555555'); // Более темный серый для светлой темы
+                    root.style.setProperty('--tg-theme-button-color-hover', '#444444');
+                    root.style.setProperty('--tg-theme-secondary-bg-color-alpha', hexToRgbA(WebApp.themeParams.secondary_bg_color, 0.4));
+                    root.style.setProperty('--tg-theme-hint-color-alpha', hexToRgbA(WebApp.themeParams.hint_color, 0.2));
                 }
             };
 
             WebApp.onEvent('themeChanged', updateTheme); // Слушаем изменения темы
             updateTheme(); // Изначальная установка темы при загрузке
 
-            // Пример использования главной кнопки Telegram Mini App
-            // WebApp.MainButton.setText('Купить Продукты');
-            // WebApp.MainButton.show();
-            // WebApp.MainButton.onClick(function() {
-            //     WebApp.openTelegramLink('https://t.me/твой_бот?start=products');
-            // });
+            // Инициализация эффекта печатания для заголовка
+            const companyTitleElement = document.getElementById('companyTitle');
+            const originalText = "VMT - Company";
+            
+            // Проверяем, что элемент существует, прежде чем с ним работать
+            if (companyTitleElement) {
+                companyTitleElement.textContent = ''; // Очищаем текст для анимации
+                
+                const typeWriter = (text, i, fnCallback) => {
+                    if (i < text.length) {
+                        companyTitleElement.textContent += text.charAt(i);
+                        setTimeout(() => typeWriter(text, i + 1, fnCallback), 100); // Скорость печатания
+                    } else if (typeof fnCallback == 'function') {
+                        setTimeout(fnCallback, 700); // Задержка после печатания
+                    }
+                };
+
+                // Запускаем анимацию печатания после небольшой задержки
+                setTimeout(() => {
+                    companyTitleElement.classList.add('is-typing-active'); // Активируем анимацию печатания
+                    companyTitleElement.classList.add('has-typing-cursor'); // Добавляем курсор
+                    typeWriter(originalText, 0, () => {
+                        // После завершения печатания, убираем курсор
+                        companyTitleElement.classList.remove('has-typing-cursor'); // Убираем курсор
+                        // Можно также удалить 'is-typing-active' если не нужно сохранять overflow:hidden
+                        // companyTitleElement.classList.remove('is-typing-active');
+                    });
+                }, 1000); // Задержка перед началом печатания
+            }
+
+
+            // Intersection Observer для анимации появления секций при скролле
+            const sections = document.querySelectorAll('.hidden-section');
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% элемента должно быть видно
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible-section');
+                        entry.target.classList.remove('hidden-section');
+                        observer.unobserve(entry.target); // Остановить наблюдение после появления
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Gemini API Integration ---
+            const generateInsightBtn = document.getElementById('generateInsightBtn');
+            const aiInsightDisplay = document.getElementById('aiInsightDisplay');
+            const loader = document.querySelector('#generateInsightBtn .loader');
+
+            if (generateInsightBtn && aiInsightDisplay && loader) {
+                generateInsightBtn.addEventListener('click', async () => {
+                    aiInsightDisplay.textContent = ''; // Очищаем предыдущий текст
+                    loader.classList.remove('hidden'); // Показываем лоадер
+                    generateInsightBtn.disabled = true; // Отключаем кнопку
+
+                    try {
+                        let chatHistory = [];
+                        const prompt = "Сгенерируй короткую, вдохновляющую цитату о трейдинге или общую мудрость о рынке, длиной не более 20 слов. Ответ должен быть только цитатой, без лишних слов.";
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = ""; // Canvas автоматически предоставит API ключ в рантайме
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            aiInsightDisplay.textContent = text;
+                        } else {
+                            aiInsightDisplay.textContent = "Не удалось сгенерировать мудрость. Попробуйте еще раз.";
+                            console.error("Unexpected API response structure:", result);
+                        }
+                    } catch (error) {
+                        aiInsightDisplay.textContent = "Ошибка при получении мудрости. Проверьте подключение.";
+                        console.error("Error calling Gemini API:", error);
+                    } finally {
+                        loader.classList.add('hidden'); // Скрываем лоадер
+                        generateInsightBtn.disabled = false; // Включаем кнопку
+                    }
+                });
+            }
+            // --- End Gemini API Integration ---
 
         } else {
             console.warn('Telegram WebApp API не инициализирован. Возможно, приложение запущено вне Telegram.');
             // Fallback для запуска вне Telegram, например, в браузере
-            document.body.style.backgroundColor = '#f5f5f5'; /* Светло-серый фон */
-            document.body.style.color = '#1a1a1a'; /* Темный текст */
-            document.querySelector('.container').style.backgroundColor = '#ffffff'; /* Белый контейнер */
-            document.querySelector('.text-gray-700').style.color = '#4a5568'; /* Темно-серый текст */
-            document.querySelectorAll('.bg-gray-50').forEach(el => el.style.backgroundColor = '#f7fafc'); /* Светлый фон для продуктов */
-            
-            // Устанавливаем монохромные цвета для кнопок в режиме без Telegram API
-            document.querySelectorAll('.social-button').forEach(button => {
-                button.style.backgroundColor = '#333333';
-                button.style.color = '#ffffff';
+            // Оборачиваем весь fallback код в DOMContentLoaded
+            window.addEventListener('DOMContentLoaded', function() {
+                document.body.style.backgroundColor = '#f5f5f5';
+                document.body.style.color = '#1a1a1a';
+
+                // Fallback для анимированного фона
+                const bodyBefore = document.createElement('style');
+                bodyBefore.innerHTML = `
+                    body::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: radial-gradient(circle at 20% 80%, rgba(0,0,0,0.05) 0%, transparent 50%),
+                                    radial-gradient(circle at 80% 20%, rgba(0,0,0,0.05) 0%, transparent 50%);
+                        background-size: 200% 200%;
+                        animation: moveBackground 15s ease infinite alternate;
+                        z-index: -1;
+                    }
+                `;
+                document.head.appendChild(bodyBefore);
+
+                const container = document.querySelector('.container');
+                if (container) {
+                    container.style.backgroundColor = 'rgba(255, 255, 255, 0.4)';
+                    container.style.backdropFilter = 'blur(20px) saturate(180%)';
+                    container.style.webkitBackdropFilter = 'blur(20px) saturate(180%)';
+                    container.style.border = '1px solid rgba(136, 136, 136, 0.2)';
+                    container.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.08), inset 0 0 15px rgba(255, 255, 255, 0.1)';
+                    container.style.borderRadius = '24px';
+                }
+
+                const textGray700 = document.querySelector('.text-gray-700');
+                if (textGray700) {
+                    textGray700.style.color = '#4a5568';
+                }
+                
+                const productCard = document.querySelector('.product-card');
+                if (productCard) {
+                    productCard.style.backgroundColor = 'rgba(247, 250, 252, 0.7)';
+                    productCard.style.backdropFilter = 'blur(10px)';
+                    productCard.style.webkitBackdropFilter = 'blur(10px)';
+                    productCard.style.border = '1px solid rgba(136, 136, 136, 0.2)';
+                    productCard.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.05)';
+                }
+                
+                // Fallback для кнопок
+                document.querySelectorAll('.social-button').forEach(button => {
+                    button.style.backgroundColor = '#333333';
+                    button.style.color = '#ffffff';
+                    button.style.padding = '18px 36px';
+                    button.style.borderRadius = '18px';
+                    button.style.fontWeight = '700';
+                    button.style.boxShadow = '0 10px 20px -5px rgba(0, 0, 0, 0.3), 0 5px 10px -2px rgba(0, 0, 0, 0.15)';
+                    button.addEventListener('mouseenter', function() {
+                        this.style.transform = 'translateY(-3px)';
+                        this.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.25), 0 0 15px rgba(255, 255, 255, 0.1)';
+                    });
+                    button.addEventListener('mouseleave', function() {
+                        this.style.transform = 'translateY(0px)';
+                        this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.15)';
+                    });
+                    button.addEventListener('mousedown', function() {
+                        this.style.transform = 'translateY(-1px) scale(0.98)';
+                        this.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+                    });
+                    button.addEventListener('mouseup', function() {
+                        this.style.transform = 'translateY(-3px)'; // Возвращаем hover-состояние
+                    });
+                });
+
+                // Fallback для disabled кнопок
+                document.querySelectorAll('.social-button.disabled').forEach(button => {
+                    button.style.filter = 'grayscale(100%) brightness(0.6)';
+                    button.style.opacity = '0.5';
+                    button.style.boxShadow = 'none';
+                    button.style.transform = 'none';
+                    button.style.backgroundColor = '#333333';
+                    button.style.pointerEvents = 'none';
+                    button.style.cursor = 'not-allowed';
+                    // Удаляем hover/active слушатели для disabled кнопок в fallback
+                    const newButton = button.cloneNode(true);
+                    button.parentNode.replaceChild(newButton, button);
+                });
+
+                // Fallback для company-title (без анимации печатания)
+                const companyTitleElement = document.getElementById('companyTitle');
+                if (companyTitleElement) { // Добавлена проверка на null
+                    companyTitleElement.textContent = "VMT - Company";
+                    companyTitleElement.classList.remove('has-typing-cursor'); // Убираем курсор
+                    companyTitleElement.classList.remove('is-typing-active'); // Убираем анимацию
+                    companyTitleElement.style.animation = 'animatedGradient 5s linear infinite alternate';
+                }
+
+                // Fallback для section-title
+                document.querySelectorAll('.section-title').forEach(title => {
+                    title.style.fontWeight = '900';
+                    title.style.letterSpacing = '0.04em';
+                    title.style.textShadow = '0 2px 4px rgba(0,0,0,0.15)';
+                    title.style.borderBottom = '3px solid';
+                    title.style.borderImage = 'linear-gradient(to right, #888888 50%, transparent 100%) 1';
+                    title.style.borderLeft = '0';
+                    title.style.borderRight = '0';
+                    title.style.borderTop = '0';
+                    // Fallback for rounded line
+                    const afterStyle = document.createElement('style');
+                    afterStyle.innerHTML = `
+                        .section-title::after {
+                            content: '';
+                            position: absolute;
+                            bottom: 0;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: 80px;
+                            height: 4px;
+                            background: linear-gradient(to right, #888888 0%, #888888 100%);
+                            border-radius: 2px;
+                            transition: width 0.3s ease, background 0.3s ease;
+                        }
+                        .section-title:hover::after {
+                            width: 120px;
+                            background: linear-gradient(to right, #007AFF 0%, #007AFF 100%);
+                        }
+                    `;
+                    document.head.appendChild(afterStyle);
+                });
+
+                // Fallback для анимации появления при скролле
+                const sections = document.querySelectorAll('.hidden-section');
+                sections.forEach(section => {
+                    section.classList.add('visible-section'); // Просто делаем их видимыми сразу
+                    section.classList.remove('hidden-section');
+                });
+
+                // Fallback for Gemini API section (just displays initial text)
+                const generateInsightBtn = document.getElementById('generateInsightBtn');
+                const aiInsightDisplay = document.getElementById('aiInsightDisplay');
+                const loader = document.querySelector('#generateInsightBtn .loader');
+
+                if (generateInsightBtn && aiInsightDisplay && loader) {
+                    generateInsightBtn.addEventListener('click', () => {
+                        aiInsightDisplay.textContent = "Gemini API не инициализирован. Запустите приложение в Telegram Mini App для этой функции.";
+                        loader.classList.add('hidden');
+                    });
+                }
             });
         }
     </script>
